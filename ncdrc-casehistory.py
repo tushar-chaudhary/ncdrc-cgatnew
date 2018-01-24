@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import re
 import ftfy
 re.compile('<title>(.*)</title>')
-from random import *
+
 
 #URL:http://cms.nic.in/ncdrcusersWeb/courtroommodule.do?method=loadCaseHistory
 def ncdrccasehistory(casetype, caseno, caseyear):
