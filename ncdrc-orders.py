@@ -783,8 +783,4 @@ def northorder(casetype, caseno, caseyear):
     print(ftfy.fix_text_encoding(result))
 
 
-if __name__ == "__main__":
-    casetype = input("enter casetype")
-    caseno = input("enter caseno")
-    caseyear = input("enter year")
-    send = ncdrcorder(casetype, caseno, caseyear)
+
