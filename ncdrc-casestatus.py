@@ -101,7 +101,7 @@ def ncdrccasestatus(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except: pass
@@ -115,7 +115,7 @@ def ncdrccasestatus(casetype, caseno, caseyear):
             payload1 = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings', 'orderflag':	'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except: pass
@@ -228,7 +228,7 @@ def delhistatecommision(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except:
@@ -243,7 +243,7 @@ def delhistatecommision(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -356,7 +356,7 @@ def districteastdelhi(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except:
@@ -371,7 +371,7 @@ def districteastdelhi(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -483,7 +483,7 @@ def districtsouthdelhi(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except:
@@ -498,7 +498,7 @@ def districtsouthdelhi(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -610,7 +610,7 @@ def districtwestdelhi(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except:
@@ -625,7 +625,7 @@ def districtwestdelhi(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -738,7 +738,7 @@ def districtcentraldelhi(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except:
@@ -753,7 +753,7 @@ def districtcentraldelhi(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -865,7 +865,7 @@ def districtnewdelhi(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except:
@@ -880,7 +880,7 @@ def districtnewdelhi(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -992,7 +992,7 @@ def districtnortheastdelhi(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except:
@@ -1007,7 +1007,7 @@ def districtnortheastdelhi(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -1119,7 +1119,7 @@ def districtnorthwestdelhi(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except:
@@ -1134,7 +1134,7 @@ def districtnorthwestdelhi(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -1246,7 +1246,7 @@ def districtsouth2(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except:
@@ -1261,7 +1261,7 @@ def districtsouth2(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -1373,7 +1373,7 @@ def districtsouthwest(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except:
@@ -1388,7 +1388,7 @@ def districtsouthwest(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -1500,7 +1500,7 @@ def districtnorth(casetype, caseno, caseyear):
             payload = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings'}
             r2 = requests.post(url=url2, params=payload)
             a = BeautifulSoup(r2.text, "lxml").text
-            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '')))
+            proceedings.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ')))
 
 
     except:
@@ -1515,7 +1515,7 @@ def districtnorth(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
