@@ -59,7 +59,7 @@ def ncdrcorder(casetype, caseno, caseyear):
             payload1 = {'case_id_in': caseidin, 'dtofhearing': datereversed1[i], 'method': 'GetProceedings', 'orderflag':	'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ',a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ',a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except: pass
@@ -125,7 +125,7 @@ def statecommisioncorder(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -190,7 +190,7 @@ def eastdelhiorder(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -255,7 +255,7 @@ def southdelhiorder(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -320,7 +320,7 @@ def westdelhiorder(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -384,7 +384,7 @@ def centraldelhiorder(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -448,7 +448,7 @@ def newdelhiorder(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
     except:
         pass
@@ -511,7 +511,7 @@ def northeastdelhiorder(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -575,7 +575,7 @@ def northwestdelhiorder(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -639,7 +639,7 @@ def south2order(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -703,7 +703,7 @@ def southwestorder(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
@@ -767,7 +767,7 @@ def northorder(casetype, caseno, caseyear):
                         'orderflag': 'D'}
             r3 = requests.post(url=url3, params=payload1)
             a1 = BeautifulSoup(r3.text, "lxml").text
-            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', '').replace('\r', '').replace('&nbsp', '').replace('Daily Order', '')))
+            orders.append(re.sub(r'[^\x00-\x7F]+', ' ', a1.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ').replace('Daily Order', '')))
 
 
     except:
