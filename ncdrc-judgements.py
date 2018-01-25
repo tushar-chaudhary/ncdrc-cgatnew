@@ -65,7 +65,7 @@ def ncdrccasestatus(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin': caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
@@ -126,7 +126,7 @@ def delhistatecommision(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin':caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
@@ -187,7 +187,7 @@ def districteastdelhi(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin': caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
@@ -248,7 +248,7 @@ def districtsouthdelhi(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin':caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
@@ -309,7 +309,7 @@ def districtwestdelhi(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin':caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
@@ -370,7 +370,7 @@ def districtcentraldelhi(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin':caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
@@ -431,7 +431,7 @@ def districtnewdelhi(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin':caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
@@ -492,7 +492,7 @@ def districtnortheastdelhi(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin':caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ',a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ',a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
@@ -553,7 +553,7 @@ def districtnorthwestdelhi(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin':caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
@@ -614,7 +614,7 @@ def districtsouth2(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin':caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
@@ -675,7 +675,7 @@ def districtsouthwest(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin':caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
@@ -736,7 +736,7 @@ def districtnorth(casetype, caseno, caseyear):
         payload = {'method': 'GetJudgement', 'dtofhearing': lastdate, 'caseidin':caseidin}
         r2 = requests.post(url=url2, params=payload)
         a = BeautifulSoup(r2.text, "lxml").text
-        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', '').replace('\r', '').replace('&nbsp', '')))
+        judgment.append(re.sub(r'[^\x00-\x7F]+', ' ', a.replace('\n', ' ').replace('\r', ' ').replace('&nbsp', ' ')))
     except:
         pass
     ret_this = {}
