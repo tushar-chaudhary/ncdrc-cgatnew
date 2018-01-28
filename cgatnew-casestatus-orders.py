@@ -7,6 +7,8 @@ from bs4 import BeautifulSoup
 import re
 import ftfy
 re.compile('<title>(.*)</title>')
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 
 def cgatnewcasestatus(casetype, caseno, caseyear):
     if casetype == "Cr.CP":
@@ -340,5 +342,82 @@ def cgatneworders(casetype, caseno, caseyear):
 
     result = json.dumps({"Orders": ret_this})
     print(ftfy.fix_text_encoding(result))
+    
+def cgatnewjudgments(bench, casetype, caseno, caseyear):
+
+    #value for casetype
+    casetypecode = {}
+    casetypecode['OA Orignal Appl.'] = 1
+    casetypecode['TA Transfer Appl.'] = 2
+    casetypecode['MA Misc. Appl.'] = 3
+    casetypecode['CP Contempt Appl.'] = 4
+    casetypecode['PT Transfer Petition'] = 5
+    casetypecode['RA Review appl.'] = 6
+    casetypecode['EA Execution petition'] = 7
+
+    #value for bench
+    benchcode = {}
+    benchcode['Principal Bench, New Delhi'] = 1
+    benchcode['Ahmedabad Bench'] = 2
+    benchcode['Allahabad Bench'] = 3
+    benchcode['Bangalore Bench'] = 4
+    benchcode['Bombay Bench'] = 5
+    benchcode['Calcutta Bench'] = 6
+    benchcode['Chandigarh Bench'] = 7
+    benchcode['Chennai Bench'] = 8
+    benchcode['Cuttack Bench'] = 9
+    benchcode['Ernakulam Bench'] = 10
+    benchcode['Guwahati Bench'] = 11
+    benchcode['Hyderabad Bench'] = 12
+    benchcode['Jabalpur Bench'] = 13
+    benchcode['Jaipur Bench'] = 14
+    benchcode['Jodhpur Bench'] = 15
+    benchcode['Lucknow Bench'] = 16
+
+
+    url = "http://judis.nic.in/CAT/list_new.asp"
+    params = [
+     ("action",	"validate_login"),
+     ("Bench_Code",	benchcode[bench]),
+     ("CaseType", casetypecode[casetype]),
+     ("CaseNo", caseno),
+     ("CaseYr",	caseyear),
+    ]
+    r = Request(url, urlencode(params).encode())
+    htmltext = urlopen(r).read().decode()
+    parser = etree.HTMLParser()
+    tree = etree.parse(StringIO(htmltext), parser)
+
+    #Bench
+    benchtext = []
+    benchtext1 = tree.xpath('//table[2]/tr/td[1]/text()')
+    benchtext.append(re.sub(r'[^\x00-\x7F]+', ' ', benchtext1[0].replace('Bench :', '').strip()))
+
+    #CaseNo. Info
+    caseinfo = []
+    caseinfo1 = tree.xpath('//table[2]/tr/td[2]/text()')
+    caseinfo.append(re.sub(r'[^\x00-\x7F]+', ' ', caseinfo1[0].strip()))
+
+    #Dated
+    dated = []
+    dated1 = tree.xpath('//table[2]/tr/td[4]/text()')
+    dated.append(re.sub(r'[^\x00-\x7F]+', ' ', dated1[0].strip()))
+
+    #Click Here Link
+    link = []
+    link1 = tree.xpath('//table[2]/tr/td[5]/a/@href')
+    link.append("http://judis.nic.in/CAT/" + link1[0])
+
+    ret_this = {}
+    try:
+        ret_this['Bench'] = bench
+        ret_this['Dated'] = dated
+        ret_this['Case Info'] = caseinfo
+        ret_this['Click Here'] = link
+    except:
+        pass
+    result = json.dumps({"Orders": ret_this})
+    print(ftfy.fix_text_encoding(result))
+
 
 
