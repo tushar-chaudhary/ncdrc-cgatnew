@@ -8,39 +8,50 @@ import urllib3
 urllib3.disable_warnings()
 requests.packages.urllib3.disable_warnings()
 
-
-def natinalcompanylawtribunal(caseno, bench, year):
+###################################CREATE SEPERATE PAGES FOR DISPLAYING OF DATA#######################################
+def natinalcompanylawtribunal_orders_judgment(caseno,  year, bench, page=None):
     bench_code = {}
-    bench_code['NEW DELHI BENCH COURT II']  = 1483
-    bench_code['NEW DELHI BENCH COURT III'] = 1484
-    bench_code['NEW DELHI BENCH COURT IV']  = 33628
+    bench_code['NEW DELHI BENCH COURT II']  = 5366
+    bench_code['NEW DELHI BENCH COURT III'] = 5367
+    bench_code['NEW DELHI BENCH COURT IV']  = 5368
 
-
-    url = "https://nclt.gov.in/case-wise-exposed-filter"
+    url = "https://nclt.gov.in/exposed-order-judgements-page"
     params = [
-     ("advocate_name",	""),
-     ("field_case_bench_nid", bench_code[bench]),
-     ("field_case_date_value[value][year]", year),
-     ("field_case_date_value[value][year]", year),
-     ("field_case_date_value[value][year]", year),
-     ("field_name_of_petition_value", ""),
-     ("field_name_of_respondent_value",	""),
-     ("title",	caseno),
+        ("advocate_name", ""),
+        ("field_bench_target_id", bench_code[bench]),
+        ("field_search_date_value[value][year]", year),
+        ("field_search_date_value[value][year]", year),
+        ("field_search_date_value[value][year]", year),
+        ("field_name_of_petitioner_value", ""),
+        ("field_name_of_respondent_value", ""),
+        ("field_search_date_value_1[value][date]", ""),
+        ("page", page),
+        ("title", caseno),
     ]
 
     ########################     MAIN   LINK ###########################################################################
-    r = requests.post(url=url, params = params ,verify=False)
+    r = requests.post(url=url, params=params, verify=False)
 
     #######################      CHANGING THE URL   ####################################################################
-    link = str(r.url).replace('case-wise-exposed-filter', 'case-wise')
+    link = str(r.url).replace('exposed-order-judgements-page', 'order-judgements')
     r2 = requests.get(url=link, verify=False)
     parser = etree.HTMLParser()
     tree = etree.parse(StringIO(r2.text), parser)
+
+
+    #Getting number of pages
+    total_page = []
+    page = tree.xpath('//*[@class="pager"]//text()')
+    for i in range(0, len(page), 2):
+        if page[i].isdigit():
+            total_page.append(page[i].strip())
+
+
     #Getting SerialNo. or Number of Cases
     sno1 = []
     try:
         sno = tree.xpath('//*[@class="views-field views-field-counter"]/text()')
-        for i  in range(0, len(sno)):
+        for i  in range(1, len(sno)):
             sno1.append(sno[i].strip())
 
     except:
@@ -49,7 +60,7 @@ def natinalcompanylawtribunal(caseno, bench, year):
     #Getting Dairy Number and Case
     dairyno1                          = []
     combined_dairynumber_status       = []
-    dairyno = tree.xpath('//*[@class="views-field views-field-title"]//text()')
+    dairyno = tree.xpath('//*[@class="views-field views-field-field-cp-no"]//text()')
     for i in range(1, len(dairyno)):
         if dairyno[i].strip() != '' and dairyno[i].strip() != 'Order(s) Judgement(s)':
             dairyno1.append(dairyno[i].strip())
@@ -61,60 +72,49 @@ def natinalcompanylawtribunal(caseno, bench, year):
     #Getting Petioner vs Respondent
     pet_vs_res_1        =[]
     pet_vs_res_advocate = []
-    pet_vs_res = tree.xpath('//*[@class="views-field views-field-field-case-advocate"]//text()')
+    pet_vs_res = tree.xpath('//*[@class="views-field views-field-field-name-of-petitioner"]//text()')
     for i in range(1, len(pet_vs_res)):
         if pet_vs_res[i].strip() != '' :
             pet_vs_res_1.append(pet_vs_res[i].strip().replace('\n', ''))
-    for j in range(0 , len(pet_vs_res_1)-1, 2):
+    for j in range(0 , len(pet_vs_res_1)-2, 3):
         pet_vs_res_name = pet_vs_res_1[j]
-        advocate_name       = pet_vs_res_1[j+1]
-        pet_vs_res_advocate.append(pet_vs_res_name + ' ' + advocate_name)
+        petioner_name       = pet_vs_res_1[j+1]
+        respondent_name = pet_vs_res_1[j+2]
+        pet_vs_res_advocate.append(pet_vs_res_name + '    ' + petioner_name + '    ' + respondent_name)
+
+
 
     #Getting Listing Date / Court No.
     listing_date_1 =[]
-    listing_date_2 =[]
-    listing_date = tree.xpath('//*[@class="views-field views-field-field-date-of-orders"]//text()')
+    listing_date = tree.xpath('//*[@class="views-field views-field-field-final-order-date"]//text()')
     for i in range(1, len(listing_date)):
         listing_date_1.append(listing_date[i].strip())
-
-    for j in range(0, len(listing_date_1)-1):
-        if listing_date_1[j] == '' and listing_date_1[j+1] == '':
-            listing_date_2.append('')
-        elif listing_date_1[j] != '' and listing_date_1[j+1] != '':
-            a = listing_date_1[j]
-            b = listing_date_1[j+1]
-            listing_date_2.append(a + b)
-
 
     ############################################ For Orders and Judgments #########################################
     orders_link = []
     orders_judgment = {}
-    orders_link_1 = tree.xpath('//*[@class="views-field views-field-title"]/p/a/@href')
+    orders_link_1 = tree.xpath('//*[@class="views-field views-field-field-cp-no"]/p/a/@href')
     for i in range(0, len(orders_link_1)):
         orders_link.append('https://nclt.gov.in/' + orders_link_1[i])
 
     ret_this = {}
-    order_and_judgment = {}
     try:
         ret_this['Serial Number'] = sno1
         ret_this['Dairy Number/Case Number'] = combined_dairynumber_status
         ret_this['Petioner vs Respondent'] = pet_vs_res_advocate
-        ret_this['Listing Date / Court No.'] = listing_date_2
+        ret_this['Listing Date / Court No.'] = listing_date_1
+        ret_this['Orders and Judgments'] = orders_link
+        ret_this['Total Pages'] = total_page
     except:
         pass
     result = {"Orders and Judgments": ret_this}
     print(result)
-    for i in range(0, len(orders_link)):
-        orders_judgment[orders_link[i]] = order_judgment(orders_link[i])
-
-    order_and_judgment['Orders and Judgments'] = orders_judgment
-    order_and_judgment = {"Orders and Judgments": order_and_judgment}
-    print(order_and_judgment)
 
 
 
 
-def order_judgment(order_link):
+
+def nclt_order_judgment_pdf_link(order_link):
     r3 = requests.get(url=order_link, verify=False)
     parser1 = etree.HTMLParser()
     tree1 = etree.parse(StringIO(r3.text), parser1)
@@ -131,7 +131,7 @@ def order_judgment(order_link):
 
     # Case No Judgement(s)
     case_no_1 = []
-    case_no = tree1.xpath('//*[@class="views-field views-field-field-interim-order-cp-ca-no-"]/text()')
+    case_no = tree1.xpath('//*[@class="views-field views-field-field-cp-no"]/text()')
     try:
         for i in range(1, len(case_no)):
             case_no_1.append(case_no[i].strip())
@@ -152,7 +152,7 @@ def order_judgment(order_link):
 
     # Orders of PDF
     pdf_1 = []
-    pdf = tree1.xpath('//*[@class="views-field views-field-field-interim-order-pdf"]/span/a/@href')
+    pdf = tree1.xpath('//*[@class="views-field views-field-field-interim-order-pdf"]/a/@href')
     try:
         for i in range(0, len(pdf)):
             if pdf[i].strip() != '':
@@ -162,13 +162,18 @@ def order_judgment(order_link):
     except:
         pass
 
-    return sno_order_1, case_no_1, date_order_1 , pdf_1
+    ret_this = {}
+    try:
+        ret_this['Serial Number'] = sno_order_1
+        ret_this['Case No Judgement(s)'] = case_no_1
+        ret_this['Date of Order'] = date_order_1
+        ret_this['Orders of PDF'] = pdf_1
+    except:
+        pass
+    result = {"Orders and Judgments": ret_this}
 
 
 
 
 if __name__ == "__main__":
-    CP_No = str(input("enter case no."))
-    Bench = input("enter bench")
-    Year = input("enter year")
-    natinalcompanylawtribunal(caseno=CP_No, bench=Bench, year=Year)
+    natinalcompanylawtribunal_orders_judgment(caseno='13', year='2018', bench='NEW DELHI BENCH COURT II', page=2)
